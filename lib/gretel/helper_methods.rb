@@ -1,9 +1,5 @@
 module Gretel
   module HelperMethods
-    include ActionView::Helpers::UrlHelper
-    def controller # hack because ActionView::Helpers::UrlHelper needs a controller method
-    end
-
     def self.included(base)
       base.send :helper_method, :breadcrumb_for, :breadcrumb, :render_breadcrumbs, :crumb_link
     end
@@ -57,7 +53,7 @@ module Gretel
       if crumb.link.url.nil?
         crumb.link.text
       else
-        link_to(crumb.link.text, crumb.link.url, crumb.link.options)
+        self.class.helpers.link_to(crumb.link.text, crumb.link.url, crumb.link.options)
       end
     end
 
